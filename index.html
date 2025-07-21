@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Equestrian Estate - 5700 S University Blvd | $4,555,000</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --luxury-bronze: #D4AF37;
+            --rich-gold: #F4D03F;
+            --deep-bronze: #B8860B;
+            --dark-charcoal: #1C1C1C;
+            --warm-charcoal: #2C2C2C;
+            --cream-white: #FAF9F6;
+            --soft-gray: #F5F5F5;
+            --medium-gray: #666666;
+            --light-bronze: #F7DC6F;
+            --transition-smooth: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            --transition-quick: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-charcoal);
+            background: var(--cream-white);
+            overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        /* Luxury Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 249, 246, 0.95);
+            backdrop-filter: blur(25px);
+            z-index: 1000;
+            padding: 3.5rem 0; /* Further increased from 2.5rem 0 */
+            transition: var(--transition-smooth);
+            border-bottom: 2px solid rgba(139, 69, 19, 0.13); /* Slightly thicker for more separation */
+        }
+
+        .header.scrolled {
+            background: rgba(250, 249, 246, 0.98);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            padding: 2.5rem 0; /* Further increased from 1.5rem 0 */
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--dark-charcoal);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo .bronze {
+            color: var(--luxury-bronze);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-charcoal);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding: 1rem 0;
+            transition: var(--transition-quick);
+            cursor: pointer;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--luxury-bronze), var(--rich-gold));
+            transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--luxury-bronze);
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, var(--luxury-bronze), var(--deep-bronze));
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-quick);
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .contact-btn:hover {
+            background: linear-gradient(135deg, var(--deep-bronze), var(--luxury-bronze));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 0;
+        }
+
+        .page {
+            display: none;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Luxury Hero Section */
+        .hero {
+            height: 135vh; /* Increased from 130vh to show all stat squares including AC */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            padding-top: 260px; /* Increased from 200px for more space below header */
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(28, 28, 28, 0.5), 
+                rgba(28, 28, 28, 0.3)
+            ),
+            url('1 University.jpg') center/cover no-repeat;
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 1000px;
+            padding: 5rem 3rem 4rem 3rem; /* Increased padding for more space */
+            color: white;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
+            margin-top: 220px; /* Increased from 180px for more space */
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 2.5rem; /* Increased from 1.5rem */
+            letter-spacing: -1px;
+            line-height: 1.1;
+            padding: 1.5rem 0; /* Added extra padding above and below */
+        }
+
+        .hero-title .bronze {
+            color: var(--light-bronze);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .property-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+            max-width: 900px;
+        }
+
+        .property-stats-single {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .stat {
+            background: rgba(250, 249, 246, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 2rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(250, 249, 246, 0.3);
+            transition: var(--transition-quick);
+        }
+
+        .stat:hover {
+            background: rgba(250, 249, 246, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--light-bronze);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-quick);
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--luxury-bronze), var(--deep-bronze));
+            color: white;
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--deep-bronze), var(--luxury-bronze));
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.4);
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: var(--dark-charcoal);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Luxury Sections */
+        .section {
+            padding: 7rem 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--dark-charcoal);
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        .section-title .bronze {
+            color: var(--luxury-bronze);
+        }
+
+        /* Premium Image Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 4/3;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(28, 28, 28, 0.9));
+            color: white;
+            padding: 2.5rem;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .overlay-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--light-bronze);
+            font-weight: 600;
+        }
+
+        .overlay-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Premium Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: var(--transition-smooth);
+            border-left: 4px solid var(--luxury-bronze);
+            position: relative;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(139, 69, 19, 0.02));
+            border-radius: 12px;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .feature-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-charcoal);
+            font-weight: 600;
+        }
+
+        .feature-description {
+            color: var(--medium-gray);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Page Headers */
+        .page-header {
+            padding: 14rem 3rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--soft-gray), var(--cream-white));
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .page-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            color: var(--dark-charcoal);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--cream-white), var(--soft-gray));
+        }
+
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 4rem;
+            margin: 4rem 0;
+        }
+
+        .agent-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: var(--transition-smooth);
+            border-top: 4px solid var(--luxury-bronze);
+        }
+
+        .agent-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+        }
+
+        .agent-photo-container {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .agent-photo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .agent-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--luxury-bronze), var(--deep-bronze));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 700;
+            border: 4px solid white;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .agent-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--dark-charcoal);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .agent-title {
+            color: var(--luxury-bronze);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .agent-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            color: var(--dark-charcoal);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: var(--transition-quick);
+            font-weight: 500;
+        }
+
+        .contact-item:hover {
+            background: var(--soft-gray);
+            color: var(--luxury-bronze);
+        }
+
+        /* Video Modal */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .video-modal.show {
+            display: flex;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            aspect-ratio: 16/9;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            padding: 0.5rem;
+        }
+
+        .close-btn:hover {
+            color: var(--light-bronze);
+            transform: rotate(90deg);
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--luxury-bronze), var(--deep-bronze));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+            z-index: 999;
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: linear-gradient(135deg, var(--deep-bronze), var(--luxury-bronze));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.4);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1200px) {
+            .nav-menu {
+                gap: 1.5rem;
+            }
+            
+            .nav-link {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+                padding: 1rem 2rem;
+            }
+            
+            .nav-menu {
+                order: 2;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            
+            .contact-btn {
+                order: 3;
+            }
+            
+            .hero {
+                padding-top: 200px;
+            }
+            
+            .page-header {
+                padding: 16rem 2rem 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .contact-btn {
+                font-size: 0.9rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            .hero {
+                padding-top: 180px;
+            }
+
+            .hero-content {
+                margin-top: 40px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .property-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                margin: 2rem 0;
+            }
+
+            .stat {
+                padding: 1.5rem 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn {
+                padding: 1rem 2rem;
+                width: 80%;
+                max-width: 300px;
+            }
+
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .page-header {
+                padding: 12rem 1.5rem 3rem;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .agents-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding-top: 160px;
+            }
+
+            .hero-content {
+                margin-top: 20px;
+                padding: 2rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .property-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .stat {
+                padding: 1.2rem 1rem;
+            }
+            
+            .nav-link {
+                font-size: 0.8rem;
+                padding: 0.5rem 0;
+            }
+            
+            .contact-btn {
+                font-size: 0.85rem;
+                padding: 0.7rem 1.2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-smooth);
+        }
+
+        .loading.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo" onclick="showPage('home')">Luxury <span class="bronze">Equestrian</span> Estate</a>
+            <ul class="nav-menu">
+                <li><a class="nav-link active" onclick="showPage('home')">Home</a></li>
+                <li><a class="nav-link" onclick="showPage('equestrian')">Equestrian</a></li>
+                <li><a class="nav-link" onclick="showPage('main-floor')">Main Floor</a></li>
+                <li><a class="nav-link" onclick="showPage('primary-suite')">Primary Suite</a></li>
+                <li><a class="nav-link" onclick="showPage('basement')">Lower Level</a></li>
+                <li><a class="nav-link" onclick="showPage('outdoor')">Outdoor Living</a></li>
+                <li><a class="nav-link" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <a href="tel:(303) 725-5701" class="contact-btn">Call (303) 725-5701</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="hero-bg"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title">Exceptional <span class="bronze">Equestrian</span> Estate</h1>
+                    <p class="hero-subtitle">5700 South University Boulevard, Greenwood Village, Colorado 80121</p>
+                    
+                    <div class="property-stats">
+                        <div class="stat">
+                            <div class="stat-number">$4,555,000</div>
+                            <div class="stat-label">Listed Price</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">5 Bed</div>
+                            <div class="stat-label">Bedrooms</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">4 Bath</div>
+                            <div class="stat-label">Bathrooms</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">5,468 SF</div>
+                            <div class="stat-label">Living Space</div>
+                        </div>
+                    </div>
+                    <div class="property-stats property-stats-single">
+                        <div class="stat">
+                            <div class="stat-number">3.98 AC</div>
+                            <div class="stat-label">Total Acres</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="openVideoModal()">Virtual Tour</button>
+                        <a class="btn btn-outline" onclick="showPage('contact')">Contact Agents</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Property <span class="bronze">Gallery</span></h2>
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="15 University.jpg" alt="Grand Exterior">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Grand Exterior</h3>
+                            <p class="overlay-description">Impressive architectural presence with circular driveway on nearly 4 acres</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="13 University.jpg" alt="Gourmet Kitchen">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Chef's Kitchen</h3>
+                            <p class="overlay-description">Thermador appliances with stunning quartzite island and custom cabinetry</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="12 University.jpg" alt="Elegant Living Room">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Elegant Living</h3>
+                            <p class="overlay-description">Vaulted ceilings with exposed beams and two-way fireplace</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="5 University.jpg" alt="Professional Barn">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Professional Barn</h3>
+                            <p class="overlay-description">4-stall barn with wash bay and professional facilities</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="14 University.jpg" alt="Luxury Primary Bath">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Luxury Primary Bath</h3>
+                            <p class="overlay-description">5-piece master suite with marble finishes and soaking tub</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="2 University.jpg" alt="Mountain Views">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Mountain Views</h3>
+                            <p class="overlay-description">Stunning Colorado Front Range backdrop from this elevated estate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card loading">
+                        <h3 class="feature-title">5,468 Square Feet</h3>
+                        <p class="feature-description">Beautifully updated living space across multiple levels with brand-new carpet throughout the entire home, creating a fresh and luxurious atmosphere.</p>
+                    </div>
+                    <div class="feature-card loading">
+                        <h3 class="feature-title">Equestrian Paradise</h3>
+                        <p class="feature-description">Complete 4-stall barn, round pen, fenced paddocks, and direct High Line Canal access for riding - a rare find in prestigious Greenwood Village.</p>
+                    </div>
+                    <div class="feature-card loading">
+                        <h3 class="feature-title">Gourmet Kitchen</h3>
+                        <p class="feature-description">Chef's dream featuring Thermador appliances, stunning quartzite island, double ovens, two dishwashers, and custom cabinetry throughout.</p>
+                    </div>
+                    <div class="feature-card loading">
+                        <h3 class="feature-title">Privacy & Security</h3>
+                        <p class="feature-description">Gated entrance with comprehensive security system and cameras throughout the property, ensuring complete privacy and peace of mind.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Equestrian Features Page -->
+        <div id="equestrian" class="page">
+            <div class="page-header">
+                <h1 class="page-title"><span class="bronze">Equestrian</span> Features</h1>
+                <p class="page-subtitle">Professional grade facilities on 3.98 acres with direct High Line Canal access</p>
+            </div>
+
+            <section class="section">
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="1 University.jpg" alt="Aerial Equestrian View">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Complete Facilities</h3>
+                            <p class="overlay-description">Aerial view showcasing the full equestrian setup with round pen, barn, and paddocks</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="4 University.jpg" alt="Horse in Paddock">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Fenced Paddocks</h3>
+                            <p class="overlay-description">Professional white fencing throughout the property for optimal horse safety</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="6 University.jpg" alt="Horse Stall">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Individual Stalls</h3>
+                            <p class="overlay-description">Quality accommodations with proper ventilation and feeding systems</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="7 University.jpg" alt="Round Pen">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Training Arena</h3>
+                            <p class="overlay-description">Professional round pen for horse training and exercise</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">High Line Canal Access</h3>
+                        <p class="feature-description">Direct ride-out access to the 71-mile High Line Canal trail system right from your barn - an incredibly rare and valuable amenity in Greenwood Village that provides endless riding opportunities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">4-Stall Professional Barn</h3>
+                        <p class="feature-description">Fully equipped barn featuring wash bay, hay and grain storage, tack room, office/studio space with 3/4 bath, and additional garage for equipment storage.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Training & Exercise Areas</h3>
+                        <p class="feature-description">Round pen for professional training, multiple fenced paddocks for turnout, and loafing shed providing shelter and comfort for your horses in all weather conditions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Rare Urban Opportunity</h3>
+                        <p class="feature-description">3.98-acre horse-ready property in prestigious Greenwood Village - an exceptionally rare find offering the perfect blend of rural equestrian lifestyle with urban convenience.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Main Floor Page -->
+        <div id="main-floor" class="page">
+            <div class="page-header">
+                <h1 class="page-title">Main Floor <span class="bronze">Elegance</span></h1>
+                <p class="page-subtitle">Sophisticated living spaces designed for both daily comfort and grand entertaining</p>
+            </div>
+
+            <section class="section">
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="8 University.jpg" alt="Luxury Laundry">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Designer Laundry</h3>
+                            <p class="overlay-description">Sophisticated navy cabinetry with gold hardware and premium finishes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">Gourmet Kitchen Excellence</h3>
+                        <p class="feature-description">A chef's paradise featuring top-of-the-line Thermador appliances, stunning quartzite island, two dishwashers, double ovens, and exquisite custom cabinetry designed for both function and beauty.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Two-Way Fireplace</h3>
+                        <p class="feature-description">Architectural masterpiece featuring a stunning fireplace that opens to both the gourmet kitchen and vaulted living room, creating seamless flow for entertaining and daily living.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Main-Level Office</h3>
+                        <p class="feature-description">Professional workspace with direct patio access, offering the perfect work-from-home environment with natural light and outdoor connectivity for enhanced productivity and well-being.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Three-Car Garage</h3>
+                        <p class="feature-description">Spacious attached garage featuring brand-new epoxy-coated floors for a clean, finished appearance that protects your investment while providing ample storage for vehicles and equipment.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Primary Suite Page -->
+        <div id="primary-suite" class="page">
+            <div class="page-header">
+                <h1 class="page-title">Primary <span class="bronze">Sanctuary</span></h1>
+                <p class="page-subtitle">A luxurious master retreat featuring spa-like amenities and serene outdoor access</p>
+            </div>
+
+            <section class="section">
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="14 University.jpg" alt="Master Bathroom">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">5-Piece Master Bath</h3>
+                            <p class="overlay-description">Luxury spa experience with marble finishes and premium fixtures</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">5-Piece Master Bathroom</h3>
+                        <p class="feature-description">Luxurious spa-like bathroom suite featuring premium marble finishes, dual vanities, separate soaking tub, walk-in shower, and water closet - creating your personal wellness retreat.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Cozy Fireplace</h3>
+                        <p class="feature-description">Romantic fireplace creates a warm, intimate atmosphere perfect for quiet evenings, adding both ambiance and comfort to your private master suite sanctuary.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Direct Deck Access</h3>
+                        <p class="feature-description">Private outdoor access from the master suite opens to your own deck, perfect for morning coffee, evening relaxation, or simply enjoying the serene property views in complete privacy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Walk-in Closet</h3>
+                        <p class="feature-description">Spacious walk-in closet with custom organization systems, providing ample storage for your complete wardrobe while maintaining an organized, boutique-like atmosphere.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Lower Level Page -->
+        <div id="basement" class="page">
+            <div class="page-header">
+                <h1 class="page-title">Lower Level <span class="bronze">Retreat</span></h1>
+                <p class="page-subtitle">Entertainment, fitness, and wellness facilities for complete luxury living</p>
+            </div>
+
+            <section class="section">
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="11 University.jpg" alt="Basement Family Room">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Entertainment Hub</h3>
+                            <p class="overlay-description">Spacious basement family room with large sectional, built-in shelving, and stone fireplace</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="10 University.jpg" alt="Fitness Center">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Private Gym</h3>
+                            <p class="overlay-description">Complete fitness facility with professional-grade equipment</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="9 University.jpg" alt="Cedar Sauna">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Wellness Retreat</h3>
+                            <p class="overlay-description">Custom cedar sauna for ultimate relaxation and health benefits</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">Family Entertainment Center</h3>
+                        <p class="feature-description">Spacious family room with cozy fireplace, built-in shelving, and large sectional seating - perfect for movie nights, game days, and family gatherings in complete comfort.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Two Additional Bedrooms</h3>
+                        <p class="feature-description">Flexible guest accommodations with full bathroom access, providing comfortable lodging for extended family, visitors, or potential live-in arrangements with complete privacy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Private Fitness Center</h3>
+                        <p class="feature-description">Fully equipped workout space with professional-grade equipment, mirrors, and proper ventilation - maintaining your fitness routine has never been more convenient or private.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Custom Cedar Sauna</h3>
+                        <p class="feature-description">Personal wellness retreat featuring custom cedar construction with traditional Finnish design, providing therapeutic benefits and ultimate relaxation after workouts or long days.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Outdoor Living Page -->
+        <div id="outdoor" class="page">
+            <div class="page-header">
+                <h1 class="page-title">Outdoor <span class="bronze">Paradise</span></h1>
+                <p class="page-subtitle">Expansive outdoor entertainment areas with natural beauty and mountain views</p>
+            </div>
+
+            <section class="section">
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="2 University.jpg" alt="Mountain Views">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Colorado Majesty</h3>
+                            <p class="overlay-description">Breathtaking Front Range mountain views from your private estate</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="3 University.jpg" alt="Property Layout">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Estate Overview</h3>
+                            <p class="overlay-description">Complete property layout showing the expansive grounds and facilities</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">Gazebo & Stone Patios</h3>
+                        <p class="feature-description">Elegant gazebo and beautifully crafted stone patios create multiple outdoor living zones for intimate gatherings, al fresco dining, and peaceful relaxation throughout the seasons.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Fire Features</h3>
+                        <p class="feature-description">Built-in fire pit and outdoor wood-burning fireplace extend your outdoor season, providing warmth and ambiance for year-round entertainment under Colorado's magnificent skies.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Built-in Grill Station</h3>
+                        <p class="feature-description">Professional outdoor grilling station with premium appliances and prep space, perfect for hosting memorable gatherings and creating culinary experiences in your outdoor kitchen.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Expansion Potential</h3>
+                        <p class="feature-description">Abundant space available for pool, sport court, or additional recreational facilities - the possibilities are endless for customizing your outdoor paradise (buyer to verify zoning requirements).</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Mature Landscaping</h3>
+                        <p class="feature-description">Established mature trees provide natural beauty, privacy screening, and cooling shade throughout the property, creating a park-like setting with seasonal interest and wildlife habitat.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Smart Irrigation System</h3>
+                        <p class="feature-description">Efficient smart irrigation technology maintains the beautiful landscaping with optimal water usage, ensuring your grounds remain lush and vibrant while being environmentally responsible.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page">
+            <div class="page-header contact-section">
+                <h1 class="page-title">Contact Our <span class="bronze">Experts</span></h1>
+                <p class="page-subtitle">Professional real estate agents specializing in luxury equestrian properties</p>
+            </div>
+
+            <section class="section contact-section">
+                <div class="agents-grid">
+                    <div class="agent-card">
+                        <div class="agent-photo-container">
+                            <img src="lisa-johnston.jpg" alt="Lisa Johnston Kane" class="agent-photo-img">
+                        </div>
+                        <h3 class="agent-name">Lisa Johnston Kane</h3>
+                        <p class="agent-title">Equestrian Property Specialist (EPS)</p>
+                        <p class="feature-description">Professional, knowledgeable, and trustworthy - Lisa specializes in luxury properties and large-acreage estates, including horse properties and mountain retreats. As a certified Equestrian Property Specialist with a lifelong passion for horses, she understands the unique needs of equestrian lifestyle properties.</p>
+                        <div class="agent-contact">
+                            <a href="tel:(303) 725-5701" class="contact-item">
+                                <span>📞</span> (303) 725-5701
+                            </a>
+                            <a href="mailto:lisajk@kentwood.com" class="contact-item">
+                                <span>✉️</span> Contact Lisa
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-photo-container">
+                            <img src="william-white.jpg" alt="William White IV" class="agent-photo-img">
+                        </div>
+                        <h3 class="agent-name">William White IV</h3>
+                        <p class="agent-title">Investment & Development Expert</p>
+                        <p class="feature-description">Dedicated, driven, and deeply passionate about real estate - William combines expertise in finance, development, and market analysis. A Vanderbilt University graduate and Colorado native, he brings analytical rigor and innovative thinking to luxury real estate transactions.</p>
+                        <div class="agent-contact">
+                            <a href="tel:(303) 725-5701" class="contact-item">
+                                <span>📞</span> (303) 725-5701
+                            </a>
+                            <a href="mailto:williamwhite@kentwood.com" class="contact-item">
+                                <span>✉️</span> Contact William
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 5rem 0; background: white; padding: 4rem; border-radius: 16px; box-shadow: 0 15px 50px rgba(0,0,0,0.1);">
+                    <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--luxury-bronze); margin-bottom: 1.5rem; font-weight: 600;">Ready to Schedule Your Private Tour?</h3>
+                    <p style="font-size: 1.2rem; margin-bottom: 3rem; color: var(--medium-gray); line-height: 1.6;">Experience this exceptional $4,555,000 equestrian estate in person and discover the luxury lifestyle that awaits.</p>
+                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
+                        <a href="tel:(303) 725-5701" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.5rem 3rem;">Call (303) 725-5701</a>
+                        <button class="btn btn-outline" style="color: var(--dark-charcoal); border-color: var(--luxury-bronze); font-size: 1.2rem; padding: 1.5rem 3rem;" onclick="openVideoModal()">Watch Virtual Tour</button>
+                    </div>
+                    
+                    <div style="padding-top: 3rem; border-top: 2px solid var(--soft-gray);">
+                        <h4 style="color: var(--luxury-bronze); margin-bottom: 1rem; font-size: 1.3rem; font-weight: 600;">Property Information</h4>
+                        <p style="color: var(--medium-gray); font-size: 1rem; line-height: 1.8;">
+                            <strong>MLS #9284262</strong> | 5700 S University Boulevard, Greenwood Village, CO 80121<br>
+                            5 Bedrooms | 4 Bathrooms | 5,468 Square Feet | 3.98 Acres<br>
+                            Built in 1981 | No HOA | Equestrian Zoned
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <button class="close-btn" onclick="closeVideoModal()">&times;</button>
+            <iframe id="vimeoPlayer" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Header scroll effect
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            const scrollTop = document.querySelector('.scroll-top');
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (currentScrollTop > 100) {
+                header.classList.add('scrolled');
+                scrollTop.classList.add('show');
+            } else {
+                header.classList.remove('scrolled');
+                scrollTop.classList.remove('show');
+            }
+            
+            lastScrollTop = currentScrollTop;
+        });
+
+        // Navigation functionality
+        function showPage(pageId) {
+            console.log('Showing page:', pageId); // Debug log
+            
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                // Small delay to allow fade out
+                setTimeout(() => {
+                    targetPage.classList.add('active');
+                }, 100);
+                
+                // Scroll to top smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Find and activate the correct nav link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }
+
+        // Video modal functions
+        function openVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('vimeoPlayer');
+            player.src = 'https://player.vimeo.com/video/1100056117?autoplay=1&title=0&byline=0&portrait=0&color=8B4513';
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('vimeoPlayer');
+            player.src = '';
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeVideoModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({ 
+                top: 0, 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Loading animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Animate loading elements
+            setTimeout(() => {
+                document.querySelectorAll('.loading').forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('loaded');
+                    }, index * 200);
+                });
+            }, 500);
+            
+            // Image loading effects
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                img.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                    this.style.transform = 'scale(1)';
+                });
+                img.style.opacity = '0';
+                img.style.transform = 'scale(0.95)';
+                img.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+        });
+
+        // Enhanced gallery interactions
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+            
+            item.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-bg');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Debug: Log when script loads
+        console.log('Website script loaded successfully');
+        console.log('Available pages:', Array.from(document.querySelectorAll('.page')).map(p => p.id));
+    </script>
+</body>
+</html>
