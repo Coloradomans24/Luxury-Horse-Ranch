@@ -22,8 +22,10 @@
             --soft-gray: #F5F5F5;
             --medium-gray: #666666;
             --light-bronze: #F7DC6F;
-            --transition-smooth: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-            --transition-quick: all 0.3s ease;
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-quick: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-hover: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-page: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         body {
@@ -42,10 +44,12 @@
             width: 100%;
             background: rgba(250, 249, 246, 0.95);
             backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             z-index: 1000;
             padding: 3.5rem 0; /* Further increased from 2.5rem 0 */
             transition: var(--transition-smooth);
             border-bottom: 2px solid rgba(139, 69, 19, 0.13); /* Slightly thicker for more separation */
+            will-change: background-color, padding, box-shadow;
         }
 
         .header.scrolled {
@@ -92,8 +96,9 @@
             font-size: 1rem;
             position: relative;
             padding: 1rem 0;
-            transition: var(--transition-quick);
+            transition: var(--transition-hover);
             cursor: pointer;
+            will-change: color;
         }
 
         .nav-link::after {
@@ -104,7 +109,8 @@
             width: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--luxury-bronze), var(--rich-gold));
-            transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: width;
         }
 
         .nav-link:hover::after,
@@ -143,8 +149,9 @@
         .page {
             display: none;
             opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition-smooth);
+            transform: translateY(20px);
+            transition: var(--transition-page);
+            will-change: opacity, transform;
         }
 
         .page.active {
@@ -227,10 +234,12 @@
         .stat {
             background: rgba(250, 249, 246, 0.15);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 2rem 1.5rem;
             border-radius: 12px;
             border: 1px solid rgba(250, 249, 246, 0.3);
-            transition: var(--transition-quick);
+            transition: var(--transition-hover);
+            will-change: transform, background-color;
         }
 
         .stat:hover {
@@ -337,24 +346,26 @@
             border-radius: 12px;
             aspect-ratio: 4/3;
             box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-            transition: var(--transition-smooth);
+            transition: var(--transition-hover);
             cursor: pointer;
+            will-change: transform, box-shadow;
         }
 
         .gallery-item:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         .gallery-overlay {
@@ -366,7 +377,8 @@
             color: white;
             padding: 2.5rem;
             transform: translateY(100%);
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
         }
 
         .gallery-item:hover .gallery-overlay {
@@ -400,9 +412,10 @@
             padding: 3rem;
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transition: var(--transition-smooth);
+            transition: var(--transition-hover);
             border-left: 4px solid var(--luxury-bronze);
             position: relative;
+            will-change: transform, box-shadow;
         }
 
         .feature-card::before {
@@ -414,8 +427,9 @@
             height: 100%;
             background: linear-gradient(135deg, transparent, rgba(139, 69, 19, 0.02));
             border-radius: 12px;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
             opacity: 0;
+            will-change: opacity;
         }
 
         .feature-card:hover::before {
@@ -423,8 +437,8 @@
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
         }
 
         .feature-title {
@@ -578,6 +592,7 @@
             justify-content: center;
             align-items: center;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .video-modal.show {
@@ -1311,35 +1326,46 @@
 
         // Navigation functionality
         function showPage(pageId) {
-            console.log('Showing page:', pageId); // Debug log
+            // Prevent multiple rapid clicks
+            if (document.querySelector('.page.active')?.id === pageId) return;
             
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
+            // Update active nav link immediately for better UX
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
             });
             
-            // Show selected page
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Get current and target pages
+            const currentPage = document.querySelector('.page.active');
             const targetPage = document.getElementById(pageId);
+            
             if (targetPage) {
-                // Small delay to allow fade out
-                setTimeout(() => {
+                // Smooth transition between pages
+                if (currentPage) {
+                    currentPage.style.opacity = '0';
+                    currentPage.style.transform = 'translateY(-10px)';
+                    
+                    setTimeout(() => {
+                        currentPage.classList.remove('active');
+                        targetPage.classList.add('active');
+                        
+                        // Trigger reflow for smooth animation
+                        targetPage.offsetHeight;
+                        
+                        targetPage.style.opacity = '1';
+                        targetPage.style.transform = 'translateY(0)';
+                    }, 150);
+                } else {
                     targetPage.classList.add('active');
-                }, 100);
+                }
                 
                 // Scroll to top smoothly
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-                // Update active nav link
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-                
-                // Find and activate the correct nav link
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)) {
-                        link.classList.add('active');
-                    }
-                });
             }
         }
 
@@ -1408,27 +1434,35 @@
             });
         });
 
-        // Enhanced gallery interactions
+        // Enhanced gallery interactions with performance optimizations
         document.querySelectorAll('.gallery-item').forEach((item, index) => {
-            item.style.animationDelay = `${index * 0.1}s`;
+            item.style.animationDelay = `${index * 0.05}s`;
             
+            // Use passive listeners for better performance
             item.addEventListener('mouseenter', function() {
                 this.style.zIndex = '10';
-            });
+            }, { passive: true });
             
             item.addEventListener('mouseleave', function() {
                 this.style.zIndex = '1';
-            });
+            }, { passive: true });
         });
 
-        // Parallax effect for hero
+        // Optimized parallax effect for hero
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero-bg');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const hero = document.querySelector('.hero-bg');
+                    if (hero) {
+                        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
-        });
+        }, { passive: true });
 
         // Debug: Log when script loads
         console.log('Website script loaded successfully');
