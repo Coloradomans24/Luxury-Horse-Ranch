@@ -35,6 +35,8 @@
             background: var(--cream-white);
             overflow-x: hidden;
             font-weight: 400;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Luxury Header */
@@ -174,6 +176,7 @@
         /* Main Content */
         .main-content {
             margin-top: 0;
+            will-change: scroll-position;
         }
 
         .page {
@@ -182,6 +185,8 @@
             transform: translateY(20px);
             transition: var(--transition-page);
             will-change: opacity, transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .page.active {
@@ -214,6 +219,7 @@
             ),
             url('032.jpg') center/cover no-repeat;
             z-index: -1;
+            transform: none !important;
         }
 
         .hero-content {
@@ -380,6 +386,8 @@
             will-change: transform, box-shadow;
             display: flex;
             flex-direction: column;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .gallery-item img {
@@ -390,6 +398,8 @@
             border-top-right-radius: 12px;
             transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .gallery-desc {
@@ -436,6 +446,8 @@
             border-left: 4px solid var(--luxury-bronze);
             position: relative;
             will-change: transform, box-shadow;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .feature-card::before {
@@ -1006,6 +1018,8 @@
             overflow: hidden;
         }
 
+
+
         .video-section::before {
             content: '';
             position: absolute;
@@ -1075,6 +1089,8 @@
                 font-size: 1.1rem;
                 margin-bottom: 3rem;
             }
+
+
         }
 
         @media (max-width: 480px) {
@@ -1090,6 +1106,8 @@
                 font-size: 1rem;
                 margin-bottom: 2.5rem;
             }
+
+
         }
 
         /* Loading Animation */
@@ -1281,6 +1299,22 @@
                     </div>
                 </div>
             </section>
+
+            <section class="section">
+                <h2 class="section-title">Property <span class="bronze">Location</span></h2>
+                <p style="text-align: center; color: var(--medium-gray); margin-bottom: 4rem; font-size: 1.2rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">Explore the neighborhood and surrounding area of this exceptional equestrian estate</p>
+                <div style="max-width: 1000px; margin: 0 auto; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 80px rgba(0,0,0,0.15); background: white;">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3075.1234567890123!2d-104.9587494!3d39.6137095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876c8123afa9fd8b%3A0x4724fb84ed374de0!2s5700%20S%20University%20Blvd%2C%20Greenwood%20Village%2C%20CO%2080121!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" 
+                        width="100%" 
+                        height="450" 
+                        style="border:0; display: block;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </section>
         </div>
 
         <!-- The Land Page -->
@@ -1292,16 +1326,16 @@
             <section class="section">
                 <div class="features-grid">
                     <div class="feature-card">
-                        <h3 class="feature-title">3.98 Acres</h3>
-                        <p class="feature-description">Nearly 4 acres of usable, level land—perfect for equestrian pursuits, recreation, or simply enjoying wide open spaces.</p>
-                    </div>
-                    <div class="feature-card">
                         <h3 class="feature-title">Direct Trail Access</h3>
                         <p class="feature-description">Ride or hike directly onto the High Line Canal trail system, offering endless outdoor adventure from your own backyard.</p>
                     </div>
                     <div class="feature-card">
-                        <h3 class="feature-title">Open & Usable</h3>
-                        <p class="feature-description">Large, open fields and grassy areas provide flexibility for horses, gardens, play, or future amenities.</p>
+                        <h3 class="feature-title">Top Schools Nearby</h3>
+                        <p class="feature-description">Close proximity to prestigious educational institutions including Aspen Leaf Academy, St. Mary's Academy, and Colorado Academy—ensuring exceptional educational opportunities for families.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Walkable Convenience</h3>
+                        <p class="feature-description">Walking distance to shopping and restaurants—a truly unique feature for a property of this size and caliber. Enjoy the perfect balance of rural tranquility and urban convenience.</p>
                     </div>
                 </div>
                 
@@ -1792,9 +1826,11 @@
     <button class="scroll-top" onclick="scrollToTop()">↑</button>
 
     <script>
-        // Header scroll effect
+        // Header scroll effect with throttling for better performance
         let lastScrollTop = 0;
-        window.addEventListener('scroll', () => {
+        let ticking = false;
+        
+        function updateHeader() {
             const header = document.querySelector('.header');
             const scrollTop = document.querySelector('.scroll-top');
             const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -1808,7 +1844,15 @@
             }
             
             lastScrollTop = currentScrollTop;
-        });
+            ticking = false;
+        }
+        
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateHeader);
+                ticking = true;
+            }
+        }, { passive: true });
 
         // Navigation functionality
         function showPage(pageId) {
@@ -1954,9 +1998,6 @@
 
         // Loading animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scroll behavior
-            document.documentElement.style.scrollBehavior = 'smooth';
-            
             // Animate loading elements
             setTimeout(() => {
                 document.querySelectorAll('.loading').forEach((el, index) => {
@@ -1966,15 +2007,23 @@
                 });
             }, 500);
             
-            // Image loading effects
-            document.querySelectorAll('.gallery-item img').forEach(img => {
-                img.addEventListener('load', function() {
-                    this.style.opacity = '1';
-                    this.style.transform = 'scale(1)';
+            // Image loading effects with performance optimizations
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.opacity = '1';
+                        img.style.transform = 'scale(1)';
+                        imageObserver.unobserve(img);
+                    }
                 });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.gallery-item img').forEach(img => {
                 img.style.opacity = '0';
                 img.style.transform = 'scale(0.95)';
                 img.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                imageObserver.observe(img);
             });
         });
 
@@ -1997,7 +2046,7 @@
                 // Single click opens modal on all devices
                 item.addEventListener('click', function(e) {
                     openImageModal(img.src, img.alt);
-                });
+                }, { passive: true });
             }
         });
 
