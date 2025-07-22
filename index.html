@@ -860,6 +860,101 @@
             }
         }
 
+        /* Video Section */
+        .video-section {
+            background: linear-gradient(135deg, var(--dark-charcoal), var(--warm-charcoal));
+            padding: 6rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(244, 208, 63, 0.1));
+            z-index: 1;
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .video-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--light-bronze);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        .video-subtitle {
+            font-size: 1.2rem;
+            color: rgba(250, 249, 246, 0.9);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            background: var(--dark-charcoal);
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+        }
+
+        /* Mobile Responsive for Video */
+        @media (max-width: 768px) {
+            .video-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .video-title {
+                font-size: 2.2rem;
+            }
+            
+            .video-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-section {
+                padding: 3rem 1rem;
+            }
+            
+            .video-title {
+                font-size: 1.8rem;
+            }
+            
+            .video-subtitle {
+                font-size: 1rem;
+                margin-bottom: 2.5rem;
+            }
+        }
+
         /* Loading Animation */
         .loading {
             opacity: 0;
@@ -929,6 +1024,25 @@
                     <div class="hero-buttons">
                         <button class="btn btn-primary" onclick="openVideoModal()">Virtual Tour</button>
                         <a class="btn btn-outline" onclick="showPage('contact')">Contact Agents</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Virtual Tour Video Section -->
+            <section class="video-section">
+                <div class="video-container">
+                    <h2 class="video-title">Experience the <span class="bronze">Virtual Tour</span></h2>
+                    <p class="video-subtitle">Take an immersive journey through this exceptional equestrian estate and discover every detail of luxury living</p>
+                    <div class="video-wrapper">
+                        <video 
+                            autoplay 
+                            loop 
+                            muted 
+                            playsinline
+                            controls>
+                            <source src="5700_south_university_boulevard___greenwood_village,_co_80121 (1080p).mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </section>
@@ -1038,6 +1152,13 @@
                             <p class="overlay-description">Professional round pen for horse training and exercise</p>
                         </div>
                     </div>
+                    <div class="gallery-item">
+                        <img src="66 University.jpg" alt="Barn Office Studio">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Office/Studio Space</h3>
+                            <p class="overlay-description">Professional workspace within the barn featuring 3/4 bath and versatile studio area</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="features-grid">
@@ -1077,6 +1198,27 @@
                             <p class="overlay-description">Sophisticated navy cabinetry with gold hardware and premium finishes</p>
                         </div>
                     </div>
+                    <div class="gallery-item">
+                        <img src="19 University.jpg" alt="Dining Room">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Formal Dining Room</h3>
+                            <p class="overlay-description">Elegant dining space with sophisticated design and premium finishes for memorable gatherings</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="53 University.jpg" alt="Main Floor Office">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Main-Level Office</h3>
+                            <p class="overlay-description">Professional workspace with direct patio access and natural light for enhanced productivity</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="68 University.jpg" alt="Three-Car Garage">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Three-Car Garage</h3>
+                            <p class="overlay-description">Spacious attached garage with epoxy-coated floors and ample storage for vehicles and equipment</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="features-grid">
@@ -1114,6 +1256,20 @@
                         <div class="gallery-overlay">
                             <h3 class="overlay-title">5-Piece Master Bath</h3>
                             <p class="overlay-description">Luxury spa experience with marble finishes and premium fixtures</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="39 University.jpg" alt="Primary Bedroom">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Master Bedroom Retreat</h3>
+                            <p class="overlay-description">Spacious primary bedroom with elegant furnishings and serene atmosphere</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="44 University.jpg" alt="Primary Suite Details">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Luxury Suite Details</h3>
+                            <p class="overlay-description">Premium finishes and thoughtful design elements throughout the master suite</p>
                         </div>
                     </div>
                 </div>
@@ -1213,6 +1369,13 @@
                         <div class="gallery-overlay">
                             <h3 class="overlay-title">Multi-Level Outdoor Spaces</h3>
                             <p class="overlay-description">Expansive backyard featuring fire pit, multiple seating areas, and covered patios perfect for large gatherings</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="73 University.jpg" alt="Built-in Grill Station">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Professional Grill Station</h3>
+                            <p class="overlay-description">Built-in outdoor kitchen with premium grilling equipment and prep space for culinary excellence</p>
                         </div>
                     </div>
                 </div>
