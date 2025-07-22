@@ -192,7 +192,7 @@
 
         /* Luxury Hero Section */
         .hero {
-            height: 135vh; /* Increased from 130vh to show all stat squares including AC */
+            min-height: 135vh; /* Changed from height to min-height to accommodate content */
             position: relative;
             display: flex;
             align-items: center;
@@ -222,7 +222,7 @@
             padding: 5rem 3rem 4rem 3rem; /* Increased padding for more space */
             color: white;
             text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
-            margin-top: 220px; /* Increased from 180px for more space */
+            margin-top: 120px; /* Reduced from 220px to ensure buttons are visible */
         }
 
         .hero-title {
@@ -907,7 +907,7 @@
                 gap: 1rem;
             }
 
-            .btn {
+            .hero-buttons .btn {
                 padding: 1rem 2rem;
                 width: 80%;
                 max-width: 300px;
