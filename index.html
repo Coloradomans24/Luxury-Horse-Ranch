@@ -374,62 +374,50 @@
             position: relative;
             overflow: hidden;
             border-radius: 12px;
-            aspect-ratio: 4/3;
             box-shadow: 0 15px 50px rgba(0,0,0,0.1);
             transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             will-change: transform, box-shadow;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-4px) scale(1.01);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
         }
 
         .gallery-item img {
             width: 100%;
-            height: 100%;
+            height: 300px;
             object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
             transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             will-change: transform;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.05);
+        .gallery-desc {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--luxury-bronze);
+            border-right: 1px solid rgba(212, 175, 55, 0.08);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+            position: relative;
+            will-change: transform, box-shadow;
         }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(28, 28, 28, 0.9));
-            color: white;
-            padding: 2.5rem;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform, opacity;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .overlay-title {
+        .desc-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem;
-            color: var(--light-bronze);
+            font-size: 1.3rem;
+            margin-bottom: 0.7rem;
+            color: var(--dark-charcoal);
             font-weight: 600;
         }
-
-        .overlay-description {
+        .desc-text {
+            color: var(--medium-gray);
+            line-height: 1.7;
             font-size: 1rem;
-            opacity: 0.9;
-            line-height: 1.6;
         }
+        /* Remove overlay styles */
+        .gallery-overlay, .gallery-item:hover .gallery-overlay, .overlay-title, .overlay-description { display: none !important; }
 
         /* Premium Features Grid */
         .features-grid {
@@ -1123,11 +1111,12 @@
             </div>
             <ul class="nav-menu">
                 <li><a class="nav-link active" onclick="showPage('home'); closeMobileMenu();">Home</a></li>
+                <li><a class="nav-link" onclick="showPage('the-land'); closeMobileMenu();">The Land</a></li>
                 <li><a class="nav-link" onclick="showPage('equestrian'); closeMobileMenu();">Equestrian</a></li>
+                <li><a class="nav-link" onclick="showPage('outdoor'); closeMobileMenu();">Outdoor Living</a></li>
                 <li><a class="nav-link" onclick="showPage('main-floor'); closeMobileMenu();">Main Floor</a></li>
                 <li><a class="nav-link" onclick="showPage('primary-suite'); closeMobileMenu();">Primary Suite</a></li>
                 <li><a class="nav-link" onclick="showPage('basement'); closeMobileMenu();">Lower Level</a></li>
-                <li><a class="nav-link" onclick="showPage('outdoor'); closeMobileMenu();">Outdoor Living</a></li>
                 <li><a class="nav-link" onclick="showPage('contact'); closeMobileMenu();">Contact</a></li>
             </ul>
             <a href="tel:(303) 725-5701" class="contact-btn">Call (303) 725-5701</a>
@@ -1150,27 +1139,27 @@
                             <div class="stat-label">Listed Price</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-number">5 Bed</div>
-                            <div class="stat-label">Bedrooms</div>
+                            <div class="stat-number">12 Miles</div>
+                            <div class="stat-label">From DTC</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-number">4 Bath</div>
-                            <div class="stat-label">Bathrooms</div>
+                            <div class="stat-number">1 of 2</div>
+                            <div class="stat-label">Available Horse Ranches</div>
                         </div>
-                        <div class="stat">
-                            <div class="stat-number">5,468 SF</div>
-                            <div class="stat-label">Living Space</div>
-                        </div>
-                    </div>
-                    <div class="property-stats property-stats-single">
                         <div class="stat">
                             <div class="stat-number">3.98 AC</div>
                             <div class="stat-label">Total Acres</div>
                         </div>
                     </div>
+                    <div class="property-stats property-stats-single">
+                        <div class="stat">
+                            <div class="stat-number">5,468 SF</div>
+                            <div class="stat-label">Living Space</div>
+                        </div>
+                    </div>
 
                     <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="openVideoModal()">Virtual Tour</button>
+                        <a class="btn btn-primary" href="https://www.zillow.com/homedetails/5700-S-University-Blvd-Greenwood-Village-CO-80121/99674231_zpid/?imxlb=t,7" target="_blank" rel="noopener">Virtual Tour</a>
                         <a class="btn btn-outline" onclick="showPage('contact')">Contact Agents</a>
                     </div>
                 </div>
@@ -1197,65 +1186,7 @@
 
             <section class="section">
                 <h2 class="section-title">Property <span class="bronze">Gallery</span></h2>
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="15 University.jpg" alt="Grand Exterior">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Grand Exterior</h3>
-                            <p class="overlay-description">Impressive architectural presence with circular driveway on nearly 4 acres</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="13 University.jpg" alt="Gourmet Kitchen">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Chef's Kitchen</h3>
-                            <p class="overlay-description">Thermador appliances with stunning quartzite island and custom cabinetry</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="12 University.jpg" alt="Elegant Living Room">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Elegant Living</h3>
-                            <p class="overlay-description">Vaulted ceilings with exposed beams and two-way fireplace</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="5 University.jpg" alt="Professional Barn">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Professional Barn</h3>
-                            <p class="overlay-description">4-stall barn with wash bay and professional facilities</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="14 University.jpg" alt="Luxury Primary Bath">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Luxury Primary Bath</h3>
-                            <p class="overlay-description">5-piece master suite with marble finishes and soaking tub</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="2 University.jpg" alt="Mountain Views">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Mountain Views</h3>
-                            <p class="overlay-description">Stunning Colorado Front Range backdrop from this elevated estate</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="main floor plan.jpg" alt="Main Floor Plan">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Main Floor Plan</h3>
-                            <p class="overlay-description">Detailed layout of the main level featuring gourmet kitchen, living areas, and bedrooms</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="lower floor plan.jpg" alt="Lower Floor Plan">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Lower Floor Plan</h3>
-                            <p class="overlay-description">Comprehensive layout of the lower level with entertainment spaces, fitness center, and additional bedrooms</p>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <div class="features-grid">
                     <div class="feature-card loading">
                         <h3 class="feature-title">5,468 Square Feet</h3>
@@ -1266,12 +1197,164 @@
                         <p class="feature-description">Complete 4-stall barn, round pen, fenced paddocks, and direct High Line Canal access for riding - a rare find in prestigious Greenwood Village.</p>
                     </div>
                     <div class="feature-card loading">
-                        <h3 class="feature-title">Gourmet Kitchen</h3>
-                        <p class="feature-description">Chef's dream featuring Thermador appliances, stunning quartzite island, double ovens, two dishwashers, and custom cabinetry throughout.</p>
-                    </div>
-                    <div class="feature-card loading">
                         <h3 class="feature-title">Privacy & Security</h3>
                         <p class="feature-description">Gated entrance with comprehensive security system and cameras throughout the property, ensuring complete privacy and peace of mind.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="031.jpg" alt="Front of Home">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Welcome Home</h3>
+                            <p class="desc-text">The grand entrance to this exceptional estate showcases timeless architecture and sophisticated design that sets the tone for luxury living.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="032.jpg" alt="Front Approach">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Front Approach</h3>
+                            <p class="desc-text">A welcoming approach to the estate, showcasing the beautiful front lawn, mature trees, and inviting curb appeal.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="2 University.jpg" alt="Mountain Views">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Mountain Views</h3>
+                            <p class="desc-text">Stunning Colorado Front Range backdrop from this elevated estate</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="027.jpg" alt="Trail Access">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Trail Access</h3>
+                            <p class="desc-text">Direct access to scenic trails for riding, hiking, and outdoor adventure right from your land.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="5 University.jpg" alt="Professional Barn">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Professional Barn</h3>
+                            <p class="desc-text">4-stall barn with wash bay and professional facilities</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="13 University.jpg" alt="Gourmet Kitchen">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Chef's Kitchen</h3>
+                            <p class="desc-text">Thermador appliances with stunning quartzite island and custom cabinetry</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="12 University.jpg" alt="Elegant Living Room">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Elegant Living</h3>
+                            <p class="desc-text">Vaulted ceilings with exposed beams and two-way fireplace</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="14 University.jpg" alt="Luxury Primary Bath">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Luxury Primary Bath</h3>
+                            <p class="desc-text">5-piece master suite with marble finishes and soaking tub</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Main Floor Plan.jpg" alt="Main Floor Plan">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Main Floor Plan</h3>
+                            <p class="desc-text">Detailed layout of the main level featuring gourmet kitchen, living areas, and bedrooms</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="Lower Floor plan.jpg" alt="Lower Floor Plan">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Lower Floor Plan</h3>
+                            <p class="desc-text">Comprehensive layout of the lower level with entertainment spaces, fitness center, and additional bedrooms</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- The Land Page -->
+        <div id="the-land" class="page">
+            <div class="page-header">
+                <h1 class="page-title">The <span class="bronze">Land</span></h1>
+                <p class="page-subtitle">Expansive acreage, open spaces, and direct access to adventure</p>
+            </div>
+            <section class="section">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">3.98 Acres</h3>
+                        <p class="feature-description">Nearly 4 acres of usable, level land—perfect for equestrian pursuits, recreation, or simply enjoying wide open spaces.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Direct Trail Access</h3>
+                        <p class="feature-description">Ride or hike directly onto the High Line Canal trail system, offering endless outdoor adventure from your own backyard.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Open & Usable</h3>
+                        <p class="feature-description">Large, open fields and grassy areas provide flexibility for horses, gardens, play, or future amenities.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="105 University.jpg" alt="Private Entrance">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Private Entrance</h3>
+                            <p class="desc-text">Elegant private entrance featuring tall brick walls that provide security and privacy while maintaining the sophisticated aesthetic of this prestigious estate.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="009.jpg" alt="Open Pasture">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Welcoming Entrance</h3>
+                            <p class="desc-text">The approach to the property features a beautiful open field and mature landscaping, setting the tone for the estate's grandeur and tranquility.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="03 University.jpg" alt="Hammock and Shade Trees">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Grand Front Lawn</h3>
+                            <p class="desc-text">Well-maintained front lawn area with the home visible, showcasing the property's approach.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="87 University.jpg" alt="Front Lawn and Home">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Shaded Retreat</h3>
+                            <p class="desc-text">Peaceful area with mature trees providing natural shade and a relaxing outdoor space.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="020.jpg" alt="Nature Retreat">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Nature Retreat</h3>
+                            <p class="desc-text">A peaceful escape surrounded by open land and trees, offering a true sense of nature just outside the city.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="84 University.jpg" alt="Back Patio and Entertaining Area">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Open Land & Trees</h3>
+                            <p class="desc-text">Grassy areas with scattered trees, offering both open space and natural shade throughout the property.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="2 University.jpg" alt="Mountain Views and Open Land">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Mountain Views</h3>
+                            <p class="desc-text">Open areas with views of the Colorado mountains, showcasing the property's scenic location.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="032.jpg" alt="Landscape Views">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Landscape Views</h3>
+                            <p class="desc-text">Breathtaking views of the property's natural landscape showcasing the beauty and tranquility of this expansive estate.</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1285,44 +1368,6 @@
             </div>
 
             <section class="section">
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="1 University.jpg" alt="Aerial Equestrian View">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Complete Facilities</h3>
-                            <p class="overlay-description">Aerial view showcasing the full equestrian setup with round pen, barn, and paddocks</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="6 University.jpg" alt="Horse in Paddock">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Fenced Paddocks</h3>
-                            <p class="overlay-description">Professional white fencing throughout the property for optimal horse safety</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="4 University.jpg" alt="Horse Stall">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Individual Stalls</h3>
-                            <p class="overlay-description">Quality accommodations with proper ventilation and feeding systems</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="7 University.jpg" alt="Round Pen">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Training Arena</h3>
-                            <p class="overlay-description">Professional round pen for horse training and exercise</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="66 University.jpg" alt="Barn Office Studio">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Office/Studio Space</h3>
-                            <p class="overlay-description">Professional workspace within the barn featuring 3/4 bath and versatile studio area</p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="features-grid">
                     <div class="feature-card">
                         <h3 class="feature-title">High Line Canal Access</h3>
@@ -1336,9 +1381,50 @@
                         <h3 class="feature-title">Training & Exercise Areas</h3>
                         <p class="feature-description">Round pen for professional training, multiple fenced paddocks for turnout, and loafing sheds providing shelter and comfort for your horses in all weather conditions.</p>
                     </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">Rare Urban Opportunity</h3>
-                        <p class="feature-description">3.98-acre horse-ready property in prestigious Greenwood Village - an exceptionally rare find offering the perfect blend of rural equestrian lifestyle with urban convenience.</p>
+                </div>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="1 University.jpg" alt="Aerial Equestrian View">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Complete Facilities</h3>
+                            <p class="desc-text">Aerial view showcasing the full equestrian setup with round pen, barn, and paddocks</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="042.jpg" alt="Equestrian Lifestyle">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Equestrian Lifestyle</h3>
+                            <p class="desc-text">Experience the joy of riding and caring for horses in a setting designed for true equestrian living.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="6 University.jpg" alt="Horse in Paddock">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Fenced Paddocks</h3>
+                            <p class="desc-text">Professional white fencing throughout the property for optimal horse safety</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="99 University.jpg" alt="Equestrian Equipment">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Equestrian Equipment</h3>
+                            <p class="desc-text">Professional-grade equipment and facilities for comprehensive horse care and training.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="4 University.jpg" alt="Horse Stall">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Individual Stalls</h3>
+                            <p class="desc-text">Quality accommodations with proper ventilation and feeding systems</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="66 University.jpg" alt="Barn Office Studio">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Office/Studio Space</h3>
+                            <p class="desc-text">Professional workspace within the barn featuring 3/4 bath and versatile studio area</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1352,73 +1438,10 @@
             </div>
 
             <section class="section">
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="8 University.jpg" alt="Luxury Laundry">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Designer Laundry</h3>
-                            <p class="overlay-description">Sophisticated navy cabinetry with gold hardware and custom organization systems</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="19 University.jpg" alt="Dining Room">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Formal Dining Room</h3>
-                            <p class="overlay-description">Elegant dining space with sophisticated design and premium finishes for memorable gatherings</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="53 University.jpg" alt="Main Floor Office">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Main-Level Office</h3>
-                            <p class="overlay-description">Professional workspace with direct patio access and natural light for enhanced productivity</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="34 University.jpg" alt="Gourmet Kitchen">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Gourmet Kitchen</h3>
-                            <p class="overlay-description">Chef's dream kitchen featuring Thermador appliances, quartzite island, and custom cabinetry</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="55 University.jpg" alt="Grand Entrance">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Grand Entrance</h3>
-                            <p class="overlay-description">Impressive entryway with elegant design and sophisticated architectural details</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="51 University.jpg" alt="First Bedroom">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">First Bedroom</h3>
-                            <p class="overlay-description">Spacious bedroom with elegant furnishings and natural light for comfortable living</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="50 University.jpg" alt="Secondary Bedroom">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Secondary Bedroom</h3>
-                            <p class="overlay-description">Well-appointed bedroom featuring quality finishes and thoughtful design elements</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="68 University.jpg" alt="Three-Car Garage">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Three-Car Garage</h3>
-                            <p class="overlay-description">Spacious attached garage with epoxy-coated floors and ample storage for vehicles and equipment</p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="features-grid">
                     <div class="feature-card">
                         <h3 class="feature-title">Gourmet Kitchen Excellence</h3>
                         <p class="feature-description">A chef's paradise featuring top-of-the-line Thermador appliances, stunning quartzite island, two dishwashers, double ovens, and exquisite custom cabinetry designed for both function and beauty.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">Two-Way Fireplace</h3>
-                        <p class="feature-description">Architectural masterpiece featuring a stunning fireplace that opens to both the gourmet kitchen and vaulted living room, creating seamless flow for entertaining and daily living.</p>
                     </div>
                     <div class="feature-card">
                         <h3 class="feature-title">Main-Level Office</h3>
@@ -1427,6 +1450,65 @@
                     <div class="feature-card">
                         <h3 class="feature-title">Three-Car Garage</h3>
                         <p class="feature-description">Spacious attached garage featuring brand-new epoxy-coated floors for a clean, finished appearance that protects your investment while providing ample storage for vehicles and equipment.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="55 University.jpg" alt="Grand Entrance">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Grand Entrance</h3>
+                            <p class="desc-text">Impressive entryway with elegant design and sophisticated architectural details</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="19 University.jpg" alt="Dining Room">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Formal Dining Room</h3>
+                            <p class="desc-text">Elegant dining space with sophisticated design and premium finishes for memorable gatherings</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="53 University.jpg" alt="Main Floor Office">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Main-Level Office</h3>
+                            <p class="desc-text">Professional workspace with direct patio access and natural light for enhanced productivity</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="34 University.jpg" alt="Gourmet Kitchen">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Gourmet Kitchen</h3>
+                            <p class="desc-text">Chef's dream kitchen featuring Thermador appliances, quartzite island, and custom cabinetry</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="8 University.jpg" alt="Luxury Laundry">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Designer Laundry</h3>
+                            <p class="desc-text">Sophisticated navy cabinetry with gold hardware and custom organization systems</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="51 University.jpg" alt="First Bedroom">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">First Bedroom</h3>
+                            <p class="desc-text">Spacious bedroom with elegant furnishings and natural light for comfortable living</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="50 University.jpg" alt="Secondary Bedroom">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Secondary Bedroom</h3>
+                            <p class="desc-text">Well-appointed bedroom featuring quality finishes and thoughtful design elements</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="68 University.jpg" alt="Three-Car Garage">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Three-Car Garage</h3>
+                            <p class="desc-text">Spacious attached garage with epoxy-coated floors and ample storage for vehicles and equipment</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1440,38 +1522,10 @@
             </div>
 
             <section class="section">
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="14 University.jpg" alt="Master Bathroom">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">5-Piece Master Bath</h3>
-                            <p class="overlay-description">Luxury spa experience with marble finishes and premium fixtures</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="39 University.jpg" alt="Primary Bedroom">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Master Bedroom Retreat</h3>
-                            <p class="overlay-description">Spacious primary bedroom with elegant furnishings and serene atmosphere</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="44 University.jpg" alt="Primary Suite Details">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Luxury Suite Details</h3>
-                            <p class="overlay-description">Premium finishes and thoughtful design elements throughout the master suite</p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="features-grid">
                     <div class="feature-card">
                         <h3 class="feature-title">5-Piece Master Bathroom</h3>
                         <p class="feature-description">Luxurious spa-like bathroom suite featuring premium marble finishes, dual vanities, separate soaking tub, walk-in shower, and water closet - creating your personal wellness retreat.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">Cozy Fireplace</h3>
-                        <p class="feature-description">Romantic fireplace creates a warm, intimate atmosphere perfect for quiet evenings, adding both ambiance and comfort to your private master suite sanctuary.</p>
                     </div>
                     <div class="feature-card">
                         <h3 class="feature-title">Direct Deck Access</h3>
@@ -1480,6 +1534,30 @@
                     <div class="feature-card">
                         <h3 class="feature-title">Walk-in Closet</h3>
                         <p class="feature-description">Spacious walk-in closet with custom organization systems, providing ample storage for your complete wardrobe while maintaining an organized, boutique-like atmosphere.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="14 University.jpg" alt="Master Bathroom">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">5-Piece Master Bath</h3>
+                            <p class="desc-text">Luxury spa experience with marble finishes and premium fixtures</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="39 University.jpg" alt="Primary Bedroom">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Master Bedroom Retreat</h3>
+                            <p class="desc-text">Spacious primary bedroom with elegant furnishings and serene atmosphere</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="44 University.jpg" alt="Primary Suite Details">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Luxury Suite Details</h3>
+                            <p class="desc-text">Premium finishes and thoughtful design elements throughout the master suite</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1493,60 +1571,56 @@
             </div>
 
             <section class="section">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">Private Fitness Center</h3>
+                        <p class="feature-description">Complete home gym with professional-grade equipment, allowing you to maintain your fitness routine without leaving the comfort of your home.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Wellness Retreat</h3>
+                        <p class="feature-description">Custom cedar sauna provides ultimate relaxation and health benefits, creating your personal spa experience right at home.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">Guest Accommodations</h3>
+                        <p class="feature-description">Two well-appointed lower-level bedrooms with quality finishes and natural light, perfect for guests, family members, or home office use.</p>
+                    </div>
+                </div>
+                
                 <div class="gallery">
                     <div class="gallery-item">
                         <img src="11 University.jpg" alt="Basement Family Room">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Entertainment Hub</h3>
-                            <p class="overlay-description">Spacious basement family room with large sectional, built-in shelving, and stone fireplace</p>
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Entertainment Hub</h3>
+                            <p class="desc-text">Spacious basement family room with large sectional, built-in shelving, and stone fireplace</p>
                         </div>
                     </div>
                     <div class="gallery-item">
                         <img src="10 University.jpg" alt="Fitness Center">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Private Gym</h3>
-                            <p class="overlay-description">Complete fitness facility with professional-grade equipment</p>
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Private Gym</h3>
+                            <p class="desc-text">Complete fitness facility with professional-grade equipment</p>
                         </div>
                     </div>
                     <div class="gallery-item">
                         <img src="9 University.jpg" alt="Cedar Sauna">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Wellness Retreat</h3>
-                            <p class="overlay-description">Custom cedar sauna for ultimate relaxation and health benefits</p>
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Wellness Retreat</h3>
+                            <p class="desc-text">Custom cedar sauna for ultimate relaxation and health benefits</p>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="lower bedroom 1.jpg" alt="Lower Bedroom 1">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Lower Bedroom 1</h3>
-                            <p class="overlay-description">Comfortable guest bedroom with quality finishes and natural light</p>
+                        <img src="Lower Bedroom 1.jpg" alt="Lower Bedroom 1">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Lower Bedroom 1</h3>
+                            <p class="desc-text">Comfortable guest bedroom with quality finishes and natural light</p>
                         </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="lower bedroom 2.jpg" alt="Lower Bedroom 2">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Lower Bedroom 2</h3>
-                            <p class="overlay-description">Well-appointed lower level bedroom with elegant furnishings</p>
+                        <img src="Lower bedroom 2.jpg" alt="Lower Bedroom 2">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Lower Bedroom 2</h3>
+                            <p class="desc-text">Well-appointed lower level bedroom with elegant furnishings</p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3 class="feature-title">Family Entertainment Center</h3>
-                        <p class="feature-description">Spacious family room with cozy fireplace, built-in shelving, and large sectional seating - perfect for movie nights, game days, and family gatherings in complete comfort.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">Two Additional Bedrooms</h3>
-                        <p class="feature-description">Flexible guest accommodations with full bathroom access, providing comfortable lodging for extended family, visitors, or potential live-in arrangements with complete privacy.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">Private Fitness Center</h3>
-                        <p class="feature-description">Fully equipped workout space with professional-grade equipment, mirrors, and proper ventilation - maintaining your fitness routine has never been more convenient or private.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3 class="feature-title">Custom Cedar Sauna</h3>
-                        <p class="feature-description">Personal wellness retreat featuring custom cedar construction with traditional Finnish design, providing therapeutic benefits and ultimate relaxation after workouts or long days.</p>
                     </div>
                 </div>
             </section>
@@ -1560,30 +1634,6 @@
             </div>
 
             <section class="section">
-                <div class="gallery">
-                    <div class="gallery-item">
-                        <img src="76 University.jpg" alt="Luxury Outdoor Patio">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Luxury Outdoor Living</h3>
-                            <p class="overlay-description">Elegant stone patio with outdoor fireplace, comfortable seating, and firewood storage for year-round entertainment</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="80 University.jpg" alt="Spacious Backyard">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Multi-Level Outdoor Spaces</h3>
-                            <p class="overlay-description">Expansive backyard featuring fire pit, multiple seating areas, and covered patios perfect for large gatherings</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="73 University.jpg" alt="Built-in Grill Station">
-                        <div class="gallery-overlay">
-                            <h3 class="overlay-title">Professional Grill Station</h3>
-                            <p class="overlay-description">Built-in outdoor kitchen with premium grilling equipment and prep space for culinary excellence</p>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="features-grid">
                     <div class="feature-card">
                         <h3 class="feature-title">Gazebo & Stone Patios</h3>
@@ -1608,6 +1658,44 @@
                     <div class="feature-card">
                         <h3 class="feature-title">Smart Irrigation System</h3>
                         <p class="feature-description">Efficient smart irrigation technology maintains the beautiful landscaping with optimal water usage, ensuring your grounds remain lush and vibrant while being environmentally responsible.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery">
+                    <div class="gallery-item">
+                        <img src="80 University.jpg" alt="Spacious Backyard">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Multi-Level Outdoor Spaces</h3>
+                            <p class="desc-text">Expansive backyard featuring fire pit, multiple seating areas, and covered patios perfect for large gatherings</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="76 University.jpg" alt="Luxury Outdoor Patio">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Luxury Outdoor Living</h3>
+                            <p class="desc-text">Elegant stone patio with outdoor fireplace, comfortable seating, and firewood storage for year-round entertainment</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="73 University.jpg" alt="Built-in Grill Station">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Professional Grill Station</h3>
+                            <p class="desc-text">Built-in outdoor kitchen with premium grilling equipment and prep space for culinary excellence</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="022.jpg" alt="Outdoor Gathering Area">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Outdoor Gathering Area</h3>
+                            <p class="desc-text">A welcoming space for friends and family to gather, dine, and enjoy the fresh Colorado air in comfort and style.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="109 University.jpg" alt="Outdoor Living Space">
+                        <div class="gallery-desc">
+                            <h3 class="desc-title">Outdoor Living Space</h3>
+                            <p class="desc-text">Additional outdoor entertainment area showcasing the versatility and beauty of the property's outdoor living spaces.</p>
+                        </div>
                     </div>
                 </div>
             </section>
