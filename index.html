@@ -1988,41 +1988,9 @@
             // Add click functionality for image modal
             const img = item.querySelector('img');
             if (img) {
-                // Desktop: single click opens modal
-                // Mobile: single click shows description, double click opens modal
-                let clickCount = 0;
-                let clickTimer = null;
-                
+                // Single click opens modal on all devices
                 item.addEventListener('click', function(e) {
-                    clickCount++;
-                    
-                    if (clickCount === 1) {
-                        clickTimer = setTimeout(() => {
-                            // Single click - show description on mobile
-                            if (window.innerWidth <= 768) {
-                                const overlay = this.querySelector('.gallery-overlay');
-                                if (overlay) {
-                                    overlay.style.transform = 'translateY(0)';
-                                    overlay.style.opacity = '1';
-                                    
-                                    // Hide description after 3 seconds
-                                    setTimeout(() => {
-                                        overlay.style.transform = 'translateY(20px)';
-                                        overlay.style.opacity = '0';
-                                    }, 3000);
-                                }
-                            } else {
-                                // Desktop: single click opens modal
-                                openImageModal(img.src, img.alt);
-                            }
-                            clickCount = 0;
-                        }, 200);
-                    } else if (clickCount === 2) {
-                        // Double click - always open modal
-                        clearTimeout(clickTimer);
-                        openImageModal(img.src, img.alt);
-                        clickCount = 0;
-                    }
+                    openImageModal(img.src, img.alt);
                 });
             }
         });
