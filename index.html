@@ -611,6 +611,64 @@
             color: var(--luxury-bronze);
         }
 
+        /* Image Modal */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .image-modal.show {
+            display: flex;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+        }
+
+        .image-modal-content img {
+            width: 100%;
+            height: auto;
+            max-height: 95vh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .image-close-btn {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition-quick);
+            padding: 0.5rem;
+            z-index: 10001;
+        }
+
+        .image-close-btn:hover {
+            color: var(--light-bronze);
+            transform: rotate(90deg);
+        }
+
         /* Video Modal */
         .video-modal {
             position: fixed;
@@ -1182,6 +1240,20 @@
                             <p class="overlay-description">Stunning Colorado Front Range backdrop from this elevated estate</p>
                         </div>
                     </div>
+                    <div class="gallery-item">
+                        <img src="main floor plan.jpg" alt="Main Floor Plan">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Main Floor Plan</h3>
+                            <p class="overlay-description">Detailed layout of the main level featuring gourmet kitchen, living areas, and bedrooms</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="lower floor plan.jpg" alt="Lower Floor Plan">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Lower Floor Plan</h3>
+                            <p class="overlay-description">Comprehensive layout of the lower level with entertainment spaces, fitness center, and additional bedrooms</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="features-grid">
@@ -1285,7 +1357,7 @@
                         <img src="8 University.jpg" alt="Luxury Laundry">
                         <div class="gallery-overlay">
                             <h3 class="overlay-title">Designer Laundry</h3>
-                            <p class="overlay-description">Sophisticated navy cabinetry with gold hardware and premium finishes</p>
+                            <p class="overlay-description">Sophisticated navy cabinetry with gold hardware and custom organization systems</p>
                         </div>
                     </div>
                     <div class="gallery-item">
@@ -1300,6 +1372,34 @@
                         <div class="gallery-overlay">
                             <h3 class="overlay-title">Main-Level Office</h3>
                             <p class="overlay-description">Professional workspace with direct patio access and natural light for enhanced productivity</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="34 University.jpg" alt="Gourmet Kitchen">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Gourmet Kitchen</h3>
+                            <p class="overlay-description">Chef's dream kitchen featuring Thermador appliances, quartzite island, and custom cabinetry</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="55 University.jpg" alt="Grand Entrance">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Grand Entrance</h3>
+                            <p class="overlay-description">Impressive entryway with elegant design and sophisticated architectural details</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="51 University.jpg" alt="First Bedroom">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">First Bedroom</h3>
+                            <p class="overlay-description">Spacious bedroom with elegant furnishings and natural light for comfortable living</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="50 University.jpg" alt="Secondary Bedroom">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Secondary Bedroom</h3>
+                            <p class="overlay-description">Well-appointed bedroom featuring quality finishes and thoughtful design elements</p>
                         </div>
                     </div>
                     <div class="gallery-item">
@@ -1413,6 +1513,20 @@
                         <div class="gallery-overlay">
                             <h3 class="overlay-title">Wellness Retreat</h3>
                             <p class="overlay-description">Custom cedar sauna for ultimate relaxation and health benefits</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="lower bedroom 1.jpg" alt="Lower Bedroom 1">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Lower Bedroom 1</h3>
+                            <p class="overlay-description">Comfortable guest bedroom with quality finishes and natural light</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="lower bedroom 2.jpg" alt="Lower Bedroom 2">
+                        <div class="gallery-overlay">
+                            <h3 class="overlay-title">Lower Bedroom 2</h3>
+                            <p class="overlay-description">Well-appointed lower level bedroom with elegant furnishings</p>
                         </div>
                     </div>
                 </div>
@@ -1564,6 +1678,14 @@
         </div>
     </main>
 
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal">
+        <div class="image-modal-content">
+            <button class="image-close-btn" onclick="closeImageModal()">&times;</button>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
     <!-- Video Modal -->
     <div class="video-modal" id="videoModal">
         <div class="video-container">
@@ -1639,6 +1761,22 @@
             }
         }
 
+        // Image modal functions
+        function openImageModal(imageSrc, imageAlt) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modalImage.alt = imageAlt;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
         // Video modal functions
         function openVideoModal() {
             const modal = document.getElementById('videoModal');
@@ -1656,17 +1794,24 @@
             document.body.style.overflow = '';
         }
 
-        // Close modal on backdrop click
+        // Close modals on backdrop click
         document.getElementById('videoModal').addEventListener('click', (e) => {
             if (e.target === e.currentTarget) {
                 closeVideoModal();
             }
         });
 
-        // Close modal on escape key
+        document.getElementById('imageModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeImageModal();
+            }
+        });
+
+        // Close modals on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeVideoModal();
+                closeImageModal();
             }
         });
 
@@ -1751,6 +1896,14 @@
             item.addEventListener('mouseleave', function() {
                 this.style.zIndex = '1';
             }, { passive: true });
+
+            // Add click functionality for image modal
+            const img = item.querySelector('img');
+            if (img) {
+                item.addEventListener('click', function() {
+                    openImageModal(img.src, img.alt);
+                });
+            }
         });
 
         // Optimized parallax effect for hero
