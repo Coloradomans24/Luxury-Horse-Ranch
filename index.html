@@ -1234,7 +1234,7 @@
                         <img src="027.jpg" alt="Trail Access">
                         <div class="gallery-desc">
                             <h3 class="desc-title">Trail Access</h3>
-                            <p class="desc-text">Direct access to scenic trails for riding, hiking, and outdoor adventure right from your land.</p>
+                            <p class="desc-text">Ride off the property for miles or to nearby Alexander Lane equestrian park - endless outdoor adventure right from your land.</p>
                         </div>
                     </div>
                     <div class="gallery-item">
@@ -2001,21 +2001,7 @@
             }
         });
 
-        // Optimized parallax effect for hero
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    const scrolled = window.pageYOffset;
-                    const hero = document.querySelector('.hero-bg');
-                    if (hero) {
-                        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }, { passive: true });
+        // Removed parallax effect to prevent background shifting
 
         // Debug: Log when script loads
         console.log('Website script loaded successfully');
